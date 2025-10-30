@@ -1,0 +1,24 @@
+<h1>Lista de Obras</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Ano</th>
+            <th>Tipo</th>
+            <th>Genero</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (obra of obra$; track obra.id) {        
+        <tr>
+            <th>{{obra.id}}</th>
+            <th>{{obra.titulo}}</th>
+            <th>{{obra.anoLancamento}}</th>
+            <th>{{obra.tipo}}</th>
+            <th>{{obra.genero?.nome}}</th>
+        </tr>
+        }
+    </tbody>
+</table>
