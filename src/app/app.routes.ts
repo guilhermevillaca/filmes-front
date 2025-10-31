@@ -4,5 +4,6 @@ import { ObraForm } from './obra/obra-form/obra-form';
 
 export const routes: Routes = [
     {path: '', component: Obra},
+    {path: 'obra', component: Obra},
     {path: 'obra/editar/:id', component: ObraForm}
 ];
