@@ -8,6 +8,7 @@
             <th>Ano</th>
             <th>Tipo</th>
             <th>Genero</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +19,10 @@
             <th>{{obra.anoLancamento}}</th>
             <th>{{obra.tipo}}</th>
             <th>{{obra.genero?.nome}}</th>
+            <th>
+                <a (click)="editar(obra.id)">Editar</a>
+                <a (click)="excluir(obra.id)">Excluir</a>
+            </th>
         </tr>
         }
     </tbody>

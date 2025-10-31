@@ -1,0 +1,43 @@
+<h1>Formulário Obra</h1>
+
+<form [formGroup]="form">
+
+    <div>
+        <label for="id">ID</label>
+        <input type="text" id="id" placeholder="ID" 
+        [formControl]="form.controls.id">
+    </div>
+    <div>
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" placeholder="Título" 
+        [formControl]="form.controls.titulo">
+    </div>
+    <div>
+        <label for="descricao">Descrição</label>
+        <input type="text" id="descricao" placeholder="Descrição" 
+        [formControl]="form.controls.descricao">
+    </div>
+    <div>
+        <label for="anoLancamento">Ano Lançamento</label>
+        <input type="text" id="anoLancamento" placeholder="Ano Lançamento" 
+        [formControl]="form.controls.anoLancamento">
+    </div>
+    <div>
+        <label for="imagemUrl">Imagem URL</label>
+        <input type="text" id="imagemUrl" placeholder="Imagem URL" 
+        [formControl]="form.controls.imagemUrl">
+    </div>
+    <div>
+        <label for="tipo">Tipo</label>
+        <input type="text" id="tipo" placeholder="Tipo" 
+        [formControl]="form.controls.tipo">
+    </div>
+    <div>
+        <label for="genero">Gênero</label>
+        <input type="text" id="genero" placeholder="genero" 
+        [formControl]="form.controls.genero">
+    </div>
+
+    <button (click)="salvar()">Salvar</button>
+
+</form>
