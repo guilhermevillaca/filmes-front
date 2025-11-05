@@ -22,19 +22,17 @@ export class Login {
     senha: new FormControl<string>('')
   });
 
-  public entrar(){
+  public entrar() {
 
     console.log(this.formLogin.value);
 
-    this.loginService.entrar(this.formLogin.get('login')?.value, this.formLogin.get('senha')?.value).subscribe(
-      login => {
-        console.log(login);
-        this.route.navigate(['/']);
-      },
-      error => {
-        console.error(error);
-      }
-    )
+    const login = this.formLogin.get('login')?.value;
+    const senha = this.formLogin.get('senha')?.value;
+
+    this.loginService.entrar(login, senha).subscribe({
+      next: () => this.route.navigate(['/']),
+      error: (err) => console.error(err)
+    });
 
   }
 
