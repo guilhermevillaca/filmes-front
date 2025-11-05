@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ObraService } from '../services/obra-service';
+import { ObraService } from '../service/obra-service';
 import { lastValueFrom } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
