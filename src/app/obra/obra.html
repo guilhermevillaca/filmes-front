@@ -1,6 +1,6 @@
 <h1>Lista de Obras</h1>
 
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>ID</th>
@@ -20,8 +20,8 @@
             <th>{{obra.tipo}}</th>
             <th>{{obra.genero?.nome}}</th>
             <th>
-                <a (click)="editar(obra.id)">Editar</a>
-                <a (click)="excluir(obra.id)">Excluir</a>
+                <a (click)="editar(obra.id)" class="btn btn-primary">Editar</a>&nbsp;
+                <a (click)="excluir(obra.id)" class="btn btn-danger">Excluir</a>
             </th>
         </tr>
         }

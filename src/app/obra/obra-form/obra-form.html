@@ -1,43 +1,93 @@
-<h1>Formulário Obra</h1>
+<div class="container mt-4 mb-5">
+  <h1 class="text-center mb-4 text-secondary">Formulário de Obra</h1>
 
-<form [formGroup]="form">
+  <a routerLink="/obra" class="btn btn-primary">Voltar</a>
 
-    <div>
-        <label for="id">ID</label>
-        <input type="text" id="id" placeholder="ID" 
-        [formControl]="form.controls.id">
-    </div>
-    <div>
-        <label for="titulo">Título</label>
-        <input type="text" id="titulo" placeholder="Título" 
-        [formControl]="form.controls.titulo">
-    </div>
-    <div>
-        <label for="descricao">Descrição</label>
-        <input type="text" id="descricao" placeholder="Descrição" 
-        [formControl]="form.controls.descricao">
-    </div>
-    <div>
-        <label for="anoLancamento">Ano Lançamento</label>
-        <input type="text" id="anoLancamento" placeholder="Ano Lançamento" 
-        [formControl]="form.controls.anoLancamento">
-    </div>
-    <div>
-        <label for="imagemUrl">Imagem URL</label>
-        <input type="text" id="imagemUrl" placeholder="Imagem URL" 
-        [formControl]="form.controls.imagemUrl">
-    </div>
-    <div>
-        <label for="tipo">Tipo</label>
-        <input type="text" id="tipo" placeholder="Tipo" 
-        [formControl]="form.controls.tipo">
-    </div>
-    <div>
-        <label for="genero">Gênero</label>
-        <input type="text" id="genero" placeholder="genero" 
-        [formControl]="form.controls.genero">
+  <form [formGroup]="form" class="p-4 rounded shadow-sm bg-light">
+
+    <div class="row g-3">
+      <div class="col-md-2">
+        <label for="id" class="form-label">ID</label>
+        <input
+          type="text"
+          id="id"
+          class="form-control"
+          placeholder="ID"
+          [formControl]="form.controls.id"
+        />
+      </div>
+
+      <div class="col-md-10">
+        <label for="titulo" class="form-label">Título</label>
+        <input
+          type="text"
+          id="titulo"
+          class="form-control"
+          placeholder="Título da obra"
+          [formControl]="form.controls.titulo"
+        />
+      </div>
+
+      <div class="col-12">
+        <label for="descricao" class="form-label">Descrição</label>
+        <textarea
+          id="descricao"
+          rows="3"
+          class="form-control"
+          placeholder="Descrição da obra"
+          [formControl]="form.controls.descricao"
+        ></textarea>
+      </div>
+
+      <div class="col-md-3">
+        <label for="anoLancamento" class="form-label">Ano de Lançamento</label>
+        <input
+          type="number"
+          id="anoLancamento"
+          class="form-control"
+          placeholder="Ex: 2024"
+          [formControl]="form.controls.anoLancamento"
+        />
+      </div>
+
+      <div class="col-md-9">
+        <label for="imagemUrl" class="form-label">Imagem (URL)</label>
+        <input
+          type="text"
+          id="imagemUrl"
+          class="form-control"
+          placeholder="https://..."
+          [formControl]="form.controls.imagemUrl"
+        />
+      </div>
+
+      <div class="col-md-6">
+        <label for="tipo" class="form-label">Tipo</label>        
+        <select name="tipo" id="tipo" [formControl]="form.controls.tipo" class="form-select">
+            <option value="">Selecione...</option>
+            <option value="FILME">Filme</option>
+            <option value="SERIE">Série</option>
+            <option value="ANIME">Anime</option>
+            <option value="DOCUMENTARIO">Documentário</option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label for="genero" class="form-label">Gênero</label>
+        <input
+          type="text"
+          id="genero"
+          class="form-control"
+          placeholder="Ação, Drama, Comédia..."
+          [formControl]="form.controls.genero"
+        />
+      </div>
     </div>
 
-    <button (click)="salvar()">Salvar</button>
-
-</form>
+    <div class="text-center mt-4">
+      <button type="button" (click)="salvar()" class="btn btn-primary px-4">
+        💾 Salvar
+      </button>
+    </div>
+  </form>
+</div>
