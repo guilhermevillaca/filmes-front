@@ -30,7 +30,7 @@ export class Login {
     const senha = this.formLogin.get('senha')?.value;
 
     this.loginService.entrar(login, senha).subscribe({
-      next: () => this.route.navigate(['/']),
+      next: () => this.route.navigate(['/painel']),
       error: (err) => console.error(err)
     });
 

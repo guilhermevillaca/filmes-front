@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ObraService } from '../../service/obra-service';
 import { lastValueFrom } from 'rxjs';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GeneroService } from '../../service/genero-service';
 
 @Component({
   selector: 'app-obra-form',
@@ -15,11 +16,13 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
   styleUrl: './obra-form.css',
 })
 export class ObraForm {
-
+ 
+  genero$: any;
   id: any;
   private activateRoute = inject(ActivatedRoute);
   private obraService = inject(ObraService);
   private route = inject(Router);
+  private generoService = inject(GeneroService);
   obra: any;
 
   form = new FormGroup({
@@ -39,6 +42,11 @@ export class ObraForm {
     if(this.id){
       this.getById();
     }
+    this.getGeneros();
+  }
+
+  public async getGeneros(){
+    this.genero$ = await lastValueFrom(this.generoService.getGeneros());
   }
 
   public async getById(){
