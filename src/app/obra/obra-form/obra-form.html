@@ -47,6 +47,8 @@
           class="form-control"
           placeholder="Ex: 2024"
           [formControl]="form.controls.anoLancamento"
+          min="1895"
+          max="{{ano}}"
         />
       </div>
 
@@ -73,20 +75,19 @@
       </div>
 
       <div class="col-md-6">
-        <label for="genero" class="form-label">Gênero</label>
-        <input
-          type="text"
-          id="genero"
-          class="form-control"
-          placeholder="Ação, Drama, Comédia..."
-          [formControl]="form.controls.genero"
-        />
+        <label for="genero" class="form-label">Gênero</label>        
+        <select name="genero" id="genero" [formControl]="form.controls.genero" class="form-select">
+            <option value="null">Selecione...</option>
+            @for(genero of genero$; track genero.id){
+              <option value="{{genero.id}}">{{genero.nome}}</option>
+            }       
+        </select>
       </div>
     </div>
 
     <div class="text-center mt-4">
       <button type="button" (click)="salvar()" class="btn btn-primary px-4">
-        💾 Salvar
+        Salvar
       </button>
     </div>
   </form>

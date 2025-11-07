@@ -8,5 +8,6 @@ export const routes: Routes = [
     {path: '', component: Painel},
     {path: 'obra', component: Obra},
     {path: 'obra/editar/:id', component: ObraForm},
+    {path: 'obra/novo', component: ObraForm},
     {path: 'login', component: Login}
 ];

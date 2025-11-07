@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ObraService } from '../../service/obra-service';
 import { lastValueFrom } from 'rxjs';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GeneroService } from '../../service/genero-service';
 
 @Component({
   selector: 'app-obra-form',
@@ -21,6 +22,10 @@ export class ObraForm {
   private obraService = inject(ObraService);
   private route = inject(Router);
   obra: any;
+  genero$: any;
+  private generoService = inject(GeneroService);
+  
+  ano: any;
 
   form = new FormGroup({
     id: new FormControl<number | null>(null),
@@ -39,6 +44,12 @@ export class ObraForm {
     if(this.id){
       this.getById();
     }
+    this.getGeneros();    
+    this.ano = new Date(Date.now()).getFullYear()+10;
+  }
+
+  public async getGeneros(){
+    this.genero$ = await lastValueFrom(this.generoService.getGeneros());
   }
 
   public async getById(){
@@ -55,8 +66,7 @@ export class ObraForm {
 
   public salvar(){
     
-    let obra = {
-      id: this.id,
+    let obra = {      
       titulo: this.form.controls.titulo.value,
       descricao: this.form.controls.descricao.value,
       anoLancamento: this.form.controls.anoLancamento.value,
@@ -67,7 +77,7 @@ export class ObraForm {
       }
     };
     console.log(obra);
-    this.obraService.salvar(obra).subscribe(
+    this.obraService.salvar(this.id, obra).subscribe(
       obra => {
         this.route.navigate(['obra']);
       },
