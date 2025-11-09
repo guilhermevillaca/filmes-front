@@ -1,5 +1,5 @@
 import {HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ObraModel as Obra } from '../model/obra-model';
 import { PageModel as Page } from '../model/page-model';
@@ -12,10 +12,7 @@ export class ObraService {
   //listar
   url = 'http://localhost:8080/obra/';
 
-  private http: HttpClient;
-  constructor(handler: HttpBackend){
-    this.http = new HttpClient(handler);
-  }
+  private http: HttpClient = inject(HttpClient);
 
   public getObras(){
     return this.http.get(this.url + 'listar').pipe(map(response=>response));
@@ -27,7 +24,7 @@ export class ObraService {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
     });
-    return this.http.get<Page<Obra>>(`${this.url}listar/paginado?page=${page}&size=${size}`, { headers: headers});
+    return this.http.get<Page<Obra>>(`${this.url}listar/paginado?page=${page}&size=${size}`);
   }
 
   //http://localhost:8080/obra/listar/1
