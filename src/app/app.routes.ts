@@ -5,9 +5,10 @@ import { Painel } from './painel/painel';
 import { Login } from './login/login';
 
 export const routes: Routes = [
-    {path: '', component: Painel},
+    {path: '', component: Login},
     {path: 'obra', component: Obra},
     {path: 'obra/editar/:id', component: ObraForm},
     {path: 'obra/novo', component: ObraForm},
-    {path: 'login', component: Login}
+    {path: 'login', component: Login},
+    {path: 'painel', component: Painel}
 ];

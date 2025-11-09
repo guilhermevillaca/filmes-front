@@ -1,4 +1,4 @@
-import { HttpBackend, HttpClient } from '@angular/common/http';
+import {HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ObraModel as Obra } from '../model/obra-model';
@@ -22,7 +22,12 @@ export class ObraService {
   }
 
   public getObrasPaginado(page: any, size: any): Observable<Page<Obra>>{
-    return this.http.get<Page<Obra>>(`${this.url}listar/paginado?=page=${page}&size=${size}`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+    });
+    return this.http.get<Page<Obra>>(`${this.url}listar/paginado?page=${page}&size=${size}`, { headers: headers});
   }
 
   //http://localhost:8080/obra/listar/1
@@ -36,5 +41,5 @@ export class ObraService {
     }
     return this.http.post(this.url + 'novo', obra);
   }
-  
+
 }
