@@ -14,8 +14,8 @@
         <th>{{genero.id}}</th>
         <th>{{genero.nome}}</th>
         <th>
-          <button class="btn btn-primary">Editar</button>&nbsp;
-          <button class="btn btn-danger">Excluir</button>
+          <button class="btn btn-primary" (click)="editar(genero.id)">Editar</button>&nbsp;
+          <button class="btn btn-danger" (click)="excluir(genero.id)">Excluir</button>
         </th>
       </tr>
     }

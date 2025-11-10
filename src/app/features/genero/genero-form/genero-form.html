@@ -1,3 +1,41 @@
-<h1>{{acao}} gênero</h1>
+<div class="container mt-4 mb-5">
+  <h1 class="text-center mb-4 text-secondary">{{ acao }} de gênero</h1>
 
-<button class="btn btn-primary" routerLink="/genero">Voltar</button>
+  <button class="btn btn-primary" routerLink="/genero">Voltar</button>
+
+  <form [formGroup]="form" class="p-4 rounded shadow-sm bg-light">
+
+    <div class="row g-3">
+      <div class="col-md-2">
+        <label for="id" class="form-label">ID</label>
+        <input
+          type="text"
+          id="id"
+          class="form-control"
+          placeholder="ID"
+          [formControl]="form.controls.id"
+        />
+      </div>
+
+      <div class="col-md-10">
+        <label for="titulo" class="form-label">Nome</label>
+        <input
+          type="text"
+          id="titulo"
+          class="form-control"
+          placeholder="Nome do Gênero"
+          [formControl]="form.controls.nome"
+        />
+      </div>
+
+
+
+
+    <div class="text-center mt-4">
+      <button type="button" (click)="salvar()" class="btn btn-primary px-4">
+        Salvar
+      </button>
+    </div>
+    </div>
+  </form>
+</div>

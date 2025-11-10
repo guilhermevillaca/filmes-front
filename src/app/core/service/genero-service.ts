@@ -24,4 +24,8 @@ export class GeneroService {
     return this.http.get<Page<Genero>>(`${this.url}listar?page=${page}&size=${size}`);
   }
 
+  public getById(id: number): Observable<Genero> {
+    return this.http.get<Genero>(`${this.url}listar/${id}`).pipe(map(response=>response));
+  }
+
 }

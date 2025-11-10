@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {GeneroService} from '../../core/service/genero-service';
 import {Genero} from '../../core/model/genero';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {SHARED_IMPORTS} from '../../shared/util/shared-imports';
 
 @Component({
@@ -13,6 +13,7 @@ import {SHARED_IMPORTS} from '../../shared/util/shared-imports';
 export class GeneroList {
 
   private service = inject(GeneroService);
+  private route = inject(Router);
   genero$: Genero[] = [];
   currentPage = 0;
   totalPages: number = 0;
@@ -42,6 +43,14 @@ export class GeneroList {
   onPageChange(page: number) {
     this.currentPage = page;
     this.getPaginado(page);
+  }
+
+  public editar(id: number){
+    this.route.navigate([`/genero/editar/`, id]);
+  }
+
+  public excluir(id: number) {
+
   }
 
 }
