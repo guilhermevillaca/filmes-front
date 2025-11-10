@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { Obra } from './obra/obra';
-import { ObraForm } from './obra/obra-form/obra-form';
-import { Painel } from './painel/painel';
-import { Login } from './login/login';
+import { Painel } from './features/painel/painel';
+import { Login } from './features/login/login';
 import {authGuard} from './auth.guard';
+import {Obra} from './features/obra/obra';
+import {ObraForm} from './features/obra/obra-form/obra-form';
 
 export const routes: Routes = [
-    {path: '', component: Login},
+    {path: '', component: Painel, canActivate: [authGuard]},
     {path: 'obra', component: Obra, canActivate: [authGuard]},
     {path: 'obra/editar/:id', component: ObraForm, canActivate: [authGuard]},
     {path: 'obra/novo', component: ObraForm, canActivate: [authGuard]},

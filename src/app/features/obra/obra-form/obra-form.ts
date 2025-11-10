@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { ObraService } from '../../service/obra-service';
+import { ObraService } from '../../../core/service/obra-service';
 import { lastValueFrom } from 'rxjs';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GeneroService } from '../../service/genero-service';
+import { GeneroService } from '../../../core/service/genero-service';
 
 @Component({
   selector: 'app-obra-form',
@@ -24,7 +24,7 @@ export class ObraForm {
   obra: any;
   genero$: any;
   private generoService = inject(GeneroService);
-  
+
   ano: any;
 
   form = new FormGroup({
@@ -44,7 +44,7 @@ export class ObraForm {
     if(this.id){
       this.getById();
     }
-    this.getGeneros();    
+    this.getGeneros();
     this.ano = new Date(Date.now()).getFullYear()+10;
   }
 
@@ -65,8 +65,8 @@ export class ObraForm {
   }
 
   public salvar(){
-    
-    let obra = {      
+
+    let obra = {
       titulo: this.form.controls.titulo.value,
       descricao: this.form.controls.descricao.value,
       anoLancamento: this.form.controls.anoLancamento.value,

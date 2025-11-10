@@ -1,52 +1,44 @@
 import { Component } from '@angular/core';
-import { ObraService } from '../service/obra-service';
+
 import { lastValueFrom } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import {ObraService} from '../../core/service/obra-service';
+import {Paginator} from '../../shared/components/paginator/paginator';
 
 @Component({
   selector: 'app-obra',
-  imports: [RouterLink],
+  imports: [RouterLink, Paginator],
   templateUrl: './obra.html',
   styleUrl: './obra.css',
 })
 export class Obra {
   obra$: any;
   currentPage = 0;
-  totalPages = 0;
-  pageSize = 10;
+  totalPages: number = 0;
+  pageSize = 15;
   constructor(private obraService: ObraService, private route: Router) {
   }
 
   ngOnInit(): void {
-    this.getObraPaginado(0);
+    this.getPaginado(0);
   }
 
   public async getObra() {
     this.obra$ = await lastValueFrom(this.obraService.getObras());
   }
 
-  public async getObraPaginado(page: number) {
-    const response = await lastValueFrom(this.obraService.getObrasPaginado(page, this.pageSize));
+  public async getPaginado(page: number) {
+    const response = await lastValueFrom(this.obraService.getPaginado(page, this.pageSize));
     this.obra$ = response.content ?? [];
-    this.totalPages = response.totalPages;
+    //this.totalPages = response.totalPages;
     this.currentPage = response.number;
+    this.totalPages = response.totalPages;
   }
 
-  previousPage() {
-    if (this.currentPage > 0) {
-      this.getObraPaginado(this.currentPage - 1);
-    }
-  }
-
-  nextPage() {
-    if (this.currentPage < this.totalPages - 1) {
-      this.getObraPaginado(this.currentPage + 1);
-    }
-  }
-
-  goToPage(page: number) {
-    this.getObraPaginado(page);
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getPaginado(page);
   }
 
   //redirecionar para componente de edição de obra
@@ -59,4 +51,5 @@ export class Obra {
 
   }
 
+  protected readonly ObraService = ObraService;
 }

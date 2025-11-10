@@ -1,0 +1,23 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <button class="page-link" (click)="anterior()" [disabled]="currentPage === 0">
+        Anterior
+      </button>
+    </li>
+
+    @for (i of visiblePages; track i) {
+      <li class="page-item" [class.active]="i === currentPage">
+        <button class="page-link" (click)="goToPage(i)">
+          {{ i + 1 }}
+        </button>
+      </li>
+    }
+
+    <li class="page-item">
+      <button class="page-link" (click)="proximo()" [disabled]="currentPage === totalPages - 1">
+        Próximo
+      </button>
+    </li>
+  </ul>
+</nav>

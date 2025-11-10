@@ -18,7 +18,7 @@ export class ObraService {
     return this.http.get(this.url + 'listar').pipe(map(response=>response));
   }
 
-  public getObrasPaginado(page: any, size: any): Observable<Page<Obra>>{
+  public getPaginado(page: any, size: any): Observable<Page<Obra>>{
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
         'Content-Type': 'application/json',

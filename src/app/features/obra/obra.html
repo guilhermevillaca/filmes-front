@@ -29,14 +29,8 @@
     </tbody>
 </table>
 
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#" (click)="previousPage()">Anterior</a></li>
-        @for (i of [].constructor(totalPages); track i) {
-        <li class="page-item" [class.active]="i === currentPage">
-            <a class="page-link" (click)="goToPage(i)">{{ i + 1 }}</a>
-        </li>
-        }
-        <li class="page-item"><a class="page-link" href="#" (click)="nextPage()">Próximo</a></li>
-    </ul>
-</nav>
+<gui-paginator
+  [totalPages]="totalPages"
+  [currentPage]="currentPage"
+  (pageChange)="onPageChange($event)">
+</gui-paginator>

@@ -1,9 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Footer } from './footer/footer';
-import { Header } from './header/header';
+import { Footer } from './core/layouts/footer/footer';
+import { Header } from './core/layouts/header/header';
 import { BehaviorSubject } from 'rxjs';
-import { LoginService } from './service/login-service';
+import { LoginService } from './core/service/login-service';
 
 @Component({
   selector: 'app-root',
