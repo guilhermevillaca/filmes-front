@@ -1,5 +1,5 @@
 <div class="container mt-4 mb-5">
-  <h1 class="text-center mb-4 text-secondary">Formulário de Obra</h1>
+  <h1 class="text-center mb-4 text-secondary">Formulário de ObraList</h1>
 
   <a routerLink="/obra" class="btn btn-primary">Voltar</a>
 
@@ -64,7 +64,7 @@
       </div>
 
       <div class="col-md-6">
-        <label for="tipo" class="form-label">Tipo</label>        
+        <label for="tipo" class="form-label">Tipo</label>
         <select name="tipo" id="tipo" [formControl]="form.controls.tipo" class="form-select">
             <option value="">Selecione...</option>
             <option value="FILME">Filme</option>
@@ -75,12 +75,12 @@
       </div>
 
       <div class="col-md-6">
-        <label for="genero" class="form-label">Gênero</label>        
+        <label for="genero" class="form-label">Gênero</label>
         <select name="genero" id="genero" [formControl]="form.controls.genero" class="form-select">
             <option value="null">Selecione...</option>
             @for(genero of genero$; track genero.id){
               <option value="{{genero.id}}">{{genero.nome}}</option>
-            }       
+            }
         </select>
       </div>
     </div>

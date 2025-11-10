@@ -1,0 +1,30 @@
+<h1>Lista de Gênero</h1>
+<button routerLink="/genero/novo" class="btn btn-primary">Novo</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(genero of genero$; track genero.id){
+      <tr>
+        <th>{{genero.id}}</th>
+        <th>{{genero.nome}}</th>
+        <th>
+          <button class="btn btn-primary">Editar</button>&nbsp;
+          <button class="btn btn-danger">Excluir</button>
+        </th>
+      </tr>
+    }
+
+  </tbody>
+</table>
+
+<gui-paginator
+  [totalPages]="totalPages"
+  [currentPage]="currentPage"
+  (pageChange)="onPageChange($event)">
+</gui-paginator>

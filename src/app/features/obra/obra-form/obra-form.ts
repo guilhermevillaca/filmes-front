@@ -4,13 +4,15 @@ import { ObraService } from '../../../core/service/obra-service';
 import { lastValueFrom } from 'rxjs';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GeneroService } from '../../../core/service/genero-service';
+import {Obra} from '../../../core/model/obra';
+import {SHARED_IMPORTS} from '../../../shared/util/shared-imports';
 
 @Component({
   selector: 'app-obra-form',
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    RouterLink
+    SHARED_IMPORTS
 ],
   templateUrl: './obra-form.html',
   styleUrl: './obra-form.css',
@@ -48,20 +50,29 @@ export class ObraForm {
     this.ano = new Date(Date.now()).getFullYear()+10;
   }
 
-  public async getGeneros(){
-    this.genero$ = await lastValueFrom(this.generoService.getGeneros());
+  public getGeneros(){
+    this.generoService.getGeneros().subscribe({
+      next: (data) => this.genero$ = data,
+      error: (error) => console.error(error),
+    })
   }
 
-  public async getById(){
-    this.obra = await lastValueFrom(this.obraService.getObraById(this.id));
-    //popular campos do formulário
-    this.form.controls.id.setValue(this.obra.id);
-    this.form.controls.titulo.setValue(this.obra.titulo);
-    this.form.controls.descricao.setValue(this.obra.descricao);
-    this.form.controls.anoLancamento.setValue(this.obra.anoLancamento);
-    this.form.controls.imagemUrl.setValue(this.obra.imagemUrl);
-    this.form.controls.tipo.setValue(this.obra.tipo);
-    this.form.controls.genero.setValue(this.obra.genero?.id);
+  public getById(){
+    this.obraService.getObraById(this.id).subscribe({
+      next: (data: Obra): void => {
+        this.obra = data;
+        //popular campos do formulário
+        this.form.controls.id.setValue(this.obra.id);
+        this.form.controls.titulo.setValue(this.obra.titulo);
+        this.form.controls.descricao.setValue(this.obra.descricao);
+        this.form.controls.anoLancamento.setValue(this.obra.anoLancamento);
+        this.form.controls.imagemUrl.setValue(this.obra.imagemUrl);
+        this.form.controls.tipo.setValue(this.obra.tipo);
+        this.form.controls.genero.setValue(this.obra.genero?.id);
+      },
+      error: (error: any) :void => console.log(error)
+    });
+
   }
 
   public salvar(){
@@ -77,14 +88,12 @@ export class ObraForm {
       }
     };
     console.log(obra);
-    this.obraService.salvar(this.id, obra).subscribe(
-      obra => {
-        this.route.navigate(['obra']);
+    this.obraService.salvar(this.id, obra).subscribe({
+      next: (obra) => {
+        this.route.navigate(['obra'])
       },
-      erro => {
-        console.log(erro);
-      }
-    )
+      error: (error) => console.error(error)
+    })
 
   }
 

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Obra } from './obra';
+import { GeneroForm } from './genero-form';
 
-describe('Obra', () => {
-  let component: Obra;
-  let fixture: ComponentFixture<Obra>;
+describe('GeneroForm', () => {
+  let component: GeneroForm;
+  let fixture: ComponentFixture<GeneroForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Obra]
+      imports: [GeneroForm]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Obra);
+    fixture = TestBed.createComponent(GeneroForm);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

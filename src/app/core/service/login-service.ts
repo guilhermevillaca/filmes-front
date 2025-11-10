@@ -9,9 +9,9 @@ export class LoginService {
 
   //listar
   url = 'http://localhost:8080/auth';
-  //private handler = inject(HttpBackend);
-  //private http = new HttpClient(this.handler); // ignora interceptors
-  private http = inject(HttpClient)
+  private handler = inject(HttpBackend);
+  private http = new HttpClient(this.handler); // ignora interceptors
+  //private http = inject(HttpClient)
 
   // Estado reativo do login
   private logadoSubject = new BehaviorSubject<boolean>(this.temLogin());

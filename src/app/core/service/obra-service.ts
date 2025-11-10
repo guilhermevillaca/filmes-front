@@ -1,8 +1,8 @@
 import {HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import {inject, Injectable} from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { ObraModel as Obra } from '../model/obra-model';
-import { PageModel as Page } from '../model/page-model';
+import { Obra } from '../model/obra';
+import { Page } from '../model/page';
 
 @Injectable({
   providedIn: 'root',
@@ -15,21 +15,16 @@ export class ObraService {
   private http: HttpClient = inject(HttpClient);
 
   public getObras(){
-    return this.http.get(this.url + 'listar').pipe(map(response=>response));
+    return this.http.get(this.url + 'listar2').pipe(map(response=>response));
   }
 
   public getPaginado(page: any, size: any): Observable<Page<Obra>>{
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-    });
-    return this.http.get<Page<Obra>>(`${this.url}listar/paginado?page=${page}&size=${size}`);
+    return this.http.get<Page<Obra>>(`${this.url}listar?page=${page}&size=${size}`);
   }
 
   //http://localhost:8080/obra/listar/1
-  public getObraById(id: number){
-    return this.http.get(this.url + 'listar/' + id).pipe(map(response=>response));
+  public getObraById(id: number): Observable<Obra>{
+    return this.http.get<Obra>(this.url + 'listar/' + id).pipe(map(response=>response));
   }
 
   public salvar(id: any, obra: any): Observable<any>{

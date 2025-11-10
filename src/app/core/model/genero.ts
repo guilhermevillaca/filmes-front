@@ -1,4 +1,4 @@
-export interface GeneroModel{
+export interface Genero {
     id: number;
     nome: string;
 }
