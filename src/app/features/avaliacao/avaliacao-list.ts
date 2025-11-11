@@ -1,13 +1,15 @@
-import {Component, inject, Input, SimpleChanges} from '@angular/core';
+import {Component, inject, Input, SimpleChanges, TemplateRef} from '@angular/core';
 import {AvaliacaoService} from '../../core/service/avaliacao-service';
 import {Avaliacao} from '../../core/model/avaliacao';
 import {SHARED_IMPORTS} from '../../shared/util/shared-imports';
 import {Obra} from '../../core/model/obra';
-import {SlicePipe} from '@angular/common';
+import {DecimalPipe, SlicePipe} from '@angular/common';
+import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap/modal';
+import {AvaliacaoForm} from './avaliacao-form/avaliacao-form';
 
 @Component({
   selector: 'app-avaliacao',
-  imports: [SHARED_IMPORTS, SlicePipe],
+  imports: [SHARED_IMPORTS, SlicePipe, DecimalPipe, ModalModule, AvaliacaoForm],
   templateUrl: './avaliacao-list.html',
   styleUrl: './avaliacao-list.css',
 })
@@ -18,8 +20,13 @@ export class AvaliacaoList {
   totalPages: number = 0;
   pageSize = 10;
 
+  modalRef?: BsModalRef | null;
+  private modalService = inject(BsModalService);
+
   private service = inject(AvaliacaoService);
   avaliacao$: any;
+
+  avaliacao_id: any;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['obra'] && this.obra?.id) {
@@ -44,16 +51,18 @@ export class AvaliacaoList {
     this.findByObra_id(page);
   }
 
-  public editar(id: any){
-    console.log(id);
+  public editar(template2: TemplateRef<void>, avaliacao_id: any){
+    this.avaliacao_id = avaliacao_id;
+    this.modalRef = this.modalService.show(template2);
   }
 
   public excluir(id: any){
     console.log(id);
   }
 
-  public visualizar(id: any){
-    console.log(id);
+  public visualizar(templateEditar: TemplateRef<void>, avaliacao_id: any) {
+    this.avaliacao_id = avaliacao_id;
+    this.modalRef = this.modalService.show(templateEditar, { class: 'modal-xl' });
   }
 
 }

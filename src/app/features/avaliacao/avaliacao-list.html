@@ -1,4 +1,4 @@
-<h4>Avaliaçções de {{obra.titulo}}</h4>
+<h4>Avaliações de {{obra?.titulo}}</h4>
 
 <button routerLink="/novo" class="btn btn-primary">Novo</button>
 
@@ -15,11 +15,11 @@
     @for(avaliacao of avaliacao$; track avaliacao.id){
       <tr>
         <td>{{avaliacao.id}}</td>
-        <td>{{avaliacao.nota}}</td>
+        <td>{{avaliacao.nota | number: '1.1-1'}}</td>
         <td>{{avaliacao.comentario | slice:0:50}}</td>
         <td>
-          <button class="btn btn-success" (click)="visualizar(avaliacao.id)">Visualizar</button>&nbsp;
-          <button class="btn btn-primary" (click)="editar(avaliacao.id)">Editar</button>&nbsp;
+          <button class="btn btn-success" (click)="visualizar(template, avaliacao.id)">Visualizar</button>&nbsp;
+          <button class="btn btn-primary" (click)="editar(templateEditar, avaliacao.id)">Editar</button>&nbsp;
           <button class="btn btn-danger" (click)="excluir(avaliacao.id)">Excluir</button>
         </td>
       </tr>
@@ -32,4 +32,33 @@
   [currentPage]="currentPage"
   (pageChange)="onPageChange($event)">
 </gui-paginator>
+
+<ng-template #template>
+
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque delectus enim esse excepturi, impedit,
+      iste magnam officia optio, quam quis quisquam saepe sint unde velit vitae! Animi in iusto ut?</p>
+
+  </div>
+
+</ng-template>
+
+<ng-template #templateEditar>
+  <div class="modal-header">
+    <h4 class="modal-title">Avaliação</h4>
+    <button type="button" class="btn-close" (click)="modalRef?.hide()"></button>
+  </div>
+
+  <div class="modal-body">
+    <app-avaliacao-form [modalRef]="modalRef" [avaliacao_id]="avaliacao_id"></app-avaliacao-form>
+  </div>
+
+</ng-template>
 

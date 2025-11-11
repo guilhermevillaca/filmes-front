@@ -1,1 +1,82 @@
-<p>avaliacao-form works!</p>
+
+<div class="container mt-4 mb-5">
+  <h1 class="text-center mb-4 text-secondary">Formulário de ObraList</h1>
+
+  <form [formGroup]="form" class="p-4 rounded shadow-sm bg-light">
+
+    <div class="row g-3">
+      <div class="col-md-2">
+        <label for="id" class="form-label">ID</label>
+        <input
+          type="text"
+          id="id"
+          class="form-control"
+          placeholder="ID"
+          [formControl]="form.controls.id"
+          readonly="true"
+        />
+      </div>
+
+      <div class="col-md-10">
+        <label for="titulo" class="form-label">Nota</label>
+        <input
+          type="text"
+          id="titulo"
+          class="form-control"
+          placeholder="Título da obra"
+          [formControl]="form.controls.nota"
+        />
+      </div>
+
+      <div class="col-12">
+        <label for="descricao" class="form-label">Descrição</label>
+        <textarea
+          id="descricao"
+          rows="3"
+          class="form-control"
+          placeholder="Descrição da obra"
+          [formControl]="form.controls.comentario"
+        ></textarea>
+      </div>
+
+      <div class="col-md-3">
+        <label for="anoLancamento" class="form-label">Ano de Lançamento</label>
+        <input
+          type="number"
+          id="anoLancamento"
+          class="form-control"
+          placeholder="Ex: 2024"
+          [formControl]="form.controls.dataAvaliacao"
+        />
+      </div>
+
+
+
+      <div class="col-md-6">
+        <label for="usuario" class="form-label">Tipo</label>
+        <select name="usuario" id="usuario" [formControl]="form.controls.usuario" class="form-select">
+          <option value="">Selecione...</option>
+          @for(usuario of usuario$; track usuario.id){
+            <option value="{{usuario.id}}">{{usuario.nome}}</option>
+          }
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label for="obra" class="form-label">Obra</label>
+        <select name="obra" id="obra" [formControl]="form.controls.obra" class="form-select">
+          <option value="null">Selecione...</option>
+          @for(obra of obra$; track obra.id){
+            <option value="{{obra.id}}">{{obra.titulo}}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <button type="button" (click)="create()" class="btn btn-primary px-4">
+        Salvar
+      </button>
+    </div>
+  </form>
+</div>
