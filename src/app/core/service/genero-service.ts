@@ -17,15 +17,15 @@ export class GeneroService {
 
 
   public getGeneros(): Observable<Genero[]>{
-    return this.http.get<Genero[]>(this.url + 'listarTodos').pipe(map(response=>response));
+    return this.http.get<Genero[]>(this.url).pipe(map(response=>response));
   }
 
   public getPaginado(page: any, size: any): Observable<Page<Genero>>{
-    return this.http.get<Page<Genero>>(`${this.url}listar?page=${page}&size=${size}`);
+    return this.http.get<Page<Genero>>(`${this.url}paginated?page=${page}&size=${size}`);
   }
 
   public getById(id: number): Observable<Genero> {
-    return this.http.get<Genero>(`${this.url}listar/${id}`).pipe(map(response=>response));
+    return this.http.get<Genero>(`${this.url}/${id}`).pipe(map(response=>response));
   }
 
 }

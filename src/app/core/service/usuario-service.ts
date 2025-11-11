@@ -13,10 +13,10 @@ export class UsuarioService {
   private http = inject(HttpClient);
 
   public getUsuarios() : Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.url}/listar2`).pipe(map(res => res));
+    return this.http.get<Usuario[]>(`${this.url}`).pipe(map(res => res));
   }
 
   public getPaginado(page: any, size: any): Observable<Page<Usuario>>{
-    return this.http.get<Page<Usuario>>(`${this.url}/listar?page=${page}&size=${size}`);
+    return this.http.get<Page<Usuario>>(`${this.url}/paginated?page=${page}&size=${size}`);
   }
 }

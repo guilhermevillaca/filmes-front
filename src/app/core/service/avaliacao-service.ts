@@ -14,11 +14,11 @@ export class AvaliacaoService {
   private http = inject(HttpClient);
 
   public getAvaliacaos(): Observable<Avaliacao[]> {
-    return this.http.get<Avaliacao[]>(`${this.url}/listar2`).pipe(map(res => res));
+    return this.http.get<Avaliacao[]>(`${this.url}`).pipe(map(res => res));
   }
 
   public getPaginado(page: any, size: any): Observable<Page<Obra>>{
-    return this.http.get<Page<Obra>>(`${this.url}listar?page=${page}&size=${size}`);
+    return this.http.get<Page<Obra>>(`${this.url}paginated?page=${page}&size=${size}`);
   }
 
 }

@@ -15,23 +15,23 @@ export class ObraService {
   private http: HttpClient = inject(HttpClient);
 
   public getObras(){
-    return this.http.get(this.url + 'listar2').pipe(map(response=>response));
+    return this.http.get(this.url).pipe(map(response=>response));
   }
 
   public getPaginado(page: any, size: any): Observable<Page<Obra>>{
-    return this.http.get<Page<Obra>>(`${this.url}listar?page=${page}&size=${size}`);
+    return this.http.get<Page<Obra>>(`${this.url}paginated?page=${page}&size=${size}`);
   }
 
   //http://localhost:8080/obra/listar/1
   public getObraById(id: number): Observable<Obra>{
-    return this.http.get<Obra>(this.url + 'listar/' + id).pipe(map(response=>response));
+    return this.http.get<Obra>(`${this.url}/id`).pipe(map(response=>response));
   }
 
   public salvar(id: any, obra: any): Observable<any>{
     if(id){
-      return this.http.put(this.url + 'atualizar/' + id, obra);
+      return this.http.put(`${this.url}/id`, obra);
     }
-    return this.http.post(this.url + 'novo', obra);
+    return this.http.post(this.url, obra);
   }
 
 }
