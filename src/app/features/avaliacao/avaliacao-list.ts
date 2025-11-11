@@ -16,7 +16,7 @@ export class AvaliacaoList {
   @Input() obra!: Obra;
   currentPage = 0;
   totalPages: number = 0;
-  pageSize = 3;
+  pageSize = 10;
 
   private service = inject(AvaliacaoService);
   avaliacao$: any;
