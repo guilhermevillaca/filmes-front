@@ -11,7 +11,7 @@ import {Obra} from '../model/obra';
 export class GeneroService {
 
   //listar
-  url = 'http://localhost:8080/genero/';
+  url = 'http://localhost:8080/genero';
 
   private http: HttpClient = inject(HttpClient);
 

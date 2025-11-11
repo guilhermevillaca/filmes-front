@@ -10,7 +10,7 @@ import { Page } from '../model/page';
 export class ObraService {
 
   //listar
-  url = 'http://localhost:8080/obra/';
+  url = 'http://localhost:8080/obra';
 
   private http: HttpClient = inject(HttpClient);
 
@@ -23,13 +23,13 @@ export class ObraService {
   }
 
   //http://localhost:8080/obra/listar/1
-  public getObraById(id: number): Observable<Obra>{
-    return this.http.get<Obra>(`${this.url}/id`).pipe(map(response=>response));
+  public getObraById(id: any): Observable<Obra>{
+    return this.http.get<Obra>(`${this.url}/${id}`).pipe(map(response=>response));
   }
 
   public salvar(id: any, obra: any): Observable<any>{
     if(id){
-      return this.http.put(`${this.url}/id`, obra);
+      return this.http.put(`${this.url}/${id}`, obra);
     }
     return this.http.post(this.url, obra);
   }

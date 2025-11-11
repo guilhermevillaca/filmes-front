@@ -43,6 +43,7 @@ export class ObraForm {
 
   ngOnInit(){
     this.id = this.activateRoute.snapshot.params['id'];
+    console.log(this.id);
     if(this.id){
       this.getById();
     }
