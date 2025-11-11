@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {SHARED_IMPORTS} from '../../shared/util/shared-imports';
 import {UsuarioService} from '../../core/service/usuario-service';
 import {Usuario} from '../../core/model/usuario';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-usuario',
@@ -15,6 +16,7 @@ export class UsuarioList {
   totalPages: number = 0;
   pageSize = 15;
   private service = inject(UsuarioService);
+  private route = inject(Router);
   usuario$: Usuario[] = [];
 
   ngOnInit() {
@@ -44,10 +46,15 @@ export class UsuarioList {
   }
 
   public editar(id: any){
-    console.log(id);
+    this.route.navigate(['usuario/editar',id]);
   }
 
   public excluir(id: any){
-    console.log(id);
+    this.service.delete(id).subscribe({
+      next: (data: any) => {
+        this.findAllPaginated(this.currentPage);;
+      },
+      error: (error: any) => console.error(error)
+    })
   }
 }

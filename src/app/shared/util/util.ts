@@ -6,3 +6,11 @@ export function converterDataISOParaInput(isoString: string): string {
     return `${ano}-${mes}-${dia}`; // formato aceito por <input type="date">
   }
 
+export function converterDataInputParaISO(dataInput: string | null | undefined): string | undefined {
+  if (!dataInput) return undefined;
+
+  const date = new Date(dataInput);
+  // Corrige o fuso local (por exemplo, UTC-3)
+  const corrected = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+  return corrected.toISOString();
+}
