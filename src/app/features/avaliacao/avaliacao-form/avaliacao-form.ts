@@ -1,6 +1,6 @@
 import {Component, inject, Input} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {AvaliacaoService} from '../../../core/service/avaliacao-service';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {Observable} from 'rxjs';
@@ -8,12 +8,16 @@ import {Obra} from '../../../core/model/obra';
 import {ObraService} from '../../../core/service/obra-service';
 import {Usuario} from '../../../core/model/usuario';
 import {UsuarioService} from '../../../core/service/usuario-service';
+import {converterDataISOParaInput} from '../../../shared/util/util';
+import {SHARED_IMPORTS} from '../../../shared/util/shared-imports';
+import {Genero} from '../../../core/model/genero';
+import {Avaliacao} from '../../../core/model/avaliacao';
 
 @Component({
   selector: 'app-avaliacao-form',
   imports: [
     ReactiveFormsModule,
-    RouterLink
+    SHARED_IMPORTS
   ],
   templateUrl: './avaliacao-form.html',
   styleUrl: './avaliacao-form.css',
@@ -32,13 +36,15 @@ export class AvaliacaoForm {
   usuario$: Usuario[] = [];
   private usuarioService = inject(UsuarioService);
 
+  private route = inject(Router);
+
   form = new FormGroup({
     id: new FormControl<string | null>({value: null, disabled: true}),
     nota: new FormControl<number | null>(null),
     comentario: new FormControl<string | null>(''),
     dataAvaliacao: new FormControl<string | null>(null),
-    usuario: new FormControl<number | null>({value: null, disabled: true}),
-    obra: new FormControl<number | null>({value: null, disabled: true})
+    usuario: new FormControl<string | null>({value: null, disabled: true}),
+    obra: new FormControl<string | null>({value: null, disabled: true})
   });
 
   ngOnInit(): void {
@@ -57,7 +63,7 @@ export class AvaliacaoForm {
         this.form.controls.id.setValue(data.id);
         this.form.controls.nota.setValue(data.nota);
         this.form.controls.comentario.setValue(data.comentario);
-        this.form.controls.dataAvaliacao.setValue(data.dataAvaliacao);
+        this.form.controls.dataAvaliacao.setValue(converterDataISOParaInput(data.dataAvaliacao));
         this.form.controls.usuario.setValue(data.usuario.id);
         this.form.controls.obra.setValue(data.obra.id);
       },
@@ -79,8 +85,38 @@ export class AvaliacaoForm {
     })
   }
 
- public create(){
-   console.log("teste");
- }
+  public create(): void {
+    if (this.form.invalid) return;
+    const avaliacao: Avaliacao = {
+      ...this.form.getRawValue(),
+      usuario: {id: this.form.controls.usuario.value},
+      obra: {id: this.form.controls.obra.value}
+    };
+    this.save(avaliacao);
+  }
+
+  public update(): void {
+    if (this.form.invalid) return;
+    const avaliacao: Avaliacao = {
+      ...this.form.getRawValue(),
+      usuario: {id: this.form.controls.usuario.value},
+      obra: {id: this.form.controls.obra.value}
+    };
+    this.save(avaliacao);
+  }
+
+  private save(avaliacao: Avaliacao): void {
+    if (this.id) {
+      this.service.update(this.id, avaliacao).subscribe({
+        next: () => this.route.navigate(['genero']),
+        error: (error) => console.error(error)
+      });
+    } else {
+      this.service.create(avaliacao).subscribe({
+        next: () => this.route.navigate(['genero']),
+        error: (error) => console.error(error)
+      });
+    }
+  }
 
 }

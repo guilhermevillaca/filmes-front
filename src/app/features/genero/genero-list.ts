@@ -17,7 +17,7 @@ export class GeneroList {
   genero$: Genero[] = [];
   currentPage = 0;
   totalPages: number = 0;
-  pageSize = 2;
+  pageSize = 15;
 
   ngOnInit() {
     this.findAllPaginated(0);
@@ -50,7 +50,12 @@ export class GeneroList {
   }
 
   public excluir(id: any) {
-    console.log(id);
+    this.service.delete(id).subscribe({
+      next: (data) => {
+        this.findAllPaginated(this.currentPage);
+      },
+      error: (error: any) => console.error(error)
+    })
   }
 
 }

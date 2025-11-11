@@ -7,6 +7,7 @@ import { GeneroService } from '../../../core/service/genero-service';
 import {Obra} from '../../../core/model/obra';
 import {SHARED_IMPORTS} from '../../../shared/util/shared-imports';
 import {AvaliacaoList} from '../../avaliacao/avaliacao-list';
+import {Genero} from '../../../core/model/genero';
 
 @Component({
   selector: 'app-obra-form',
@@ -23,7 +24,7 @@ export class ObraForm {
 
   id: any;
   private activateRoute = inject(ActivatedRoute);
-  private obraService = inject(ObraService);
+  private service = inject(ObraService);
   private route = inject(Router);
   obra: any;
   genero$: any;
@@ -60,7 +61,7 @@ export class ObraForm {
   }
 
   public findById(){
-    this.obraService.findById(this.id).subscribe({
+    this.service.findById(this.id).subscribe({
       next: (data: Obra): void => {
         this.obra = data;
         //popular campos do formulário
@@ -84,11 +85,7 @@ export class ObraForm {
       ...this.form.getRawValue(),
       genero: { id: this.form.controls.genero.value }
     };
-
-    this.obraService.create(obra).subscribe({
-      next: () => this.route.navigate(['obra']),
-      error: (error) => console.error(error)
-    });
+    this.save(obra);
   }
 
   public update(){
@@ -99,13 +96,22 @@ export class ObraForm {
       genero: { id: this.form.controls.genero.value }
     };
 
-    this.obraService.update(this.id, obra).subscribe({
-      next: (obra) => {
-        this.route.navigate(['obra'])
-      },
-      error: (error) => console.error(error)
-    })
+    this.save(obra);
 
+  }
+
+  private save(obra: Obra): void{
+    if(this.id){
+      this.service.update(this.id, obra).subscribe({
+        next: () => this.route.navigate(['genero']),
+        error: (error) => console.error(error)
+      });
+    }else{
+      this.service.create(obra).subscribe({
+        next: () => this.route.navigate(['genero']),
+        error: (error) => console.error(error)
+      });
+    }
   }
 
 }

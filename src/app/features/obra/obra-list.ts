@@ -52,10 +52,13 @@ export class ObraList {
     this.route.navigate(['obra/editar', id]);
   }
 
-  //chamar um método do service que fará exclusão
-  public excluir(id: number) {
-
+  public excluir(id: any) {
+    this.service.delete(id).subscribe({
+      next: (data) => {
+        this.findAllPaginated(this.currentPage);
+      },
+      error: (error: any) => console.error(error)
+    })
   }
 
-  protected readonly ObraService = ObraService;
 }

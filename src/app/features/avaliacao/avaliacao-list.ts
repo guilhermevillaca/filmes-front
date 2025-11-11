@@ -4,7 +4,7 @@ import {Avaliacao} from '../../core/model/avaliacao';
 import {SHARED_IMPORTS} from '../../shared/util/shared-imports';
 import {Obra} from '../../core/model/obra';
 import {DecimalPipe, SlicePipe} from '@angular/common';
-import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap/modal';
+import {BsModalRef, BsModalService, ModalModule, ModalOptions} from 'ngx-bootstrap/modal';
 import {AvaliacaoForm} from './avaliacao-form/avaliacao-form';
 
 @Component({
@@ -62,7 +62,9 @@ export class AvaliacaoList {
 
   public visualizar(templateEditar: TemplateRef<void>, avaliacao_id: any) {
     this.avaliacao_id = avaliacao_id;
-    this.modalRef = this.modalService.show(templateEditar, { class: 'modal-xl' });
+    const config: ModalOptions = { class: 'modal-xl' };
+    this.modalRef = this.modalService.show(templateEditar, config);
+    this.modalRef.setClass('modal-xl');
   }
 
 }

@@ -1,4 +1,4 @@
-<h4>Avaliações de {{obra?.titulo}}</h4>
+<h4>Avaliações de {{obra.titulo}}</h4>
 
 <button routerLink="/novo" class="btn btn-primary">Novo</button>
 
@@ -34,30 +34,33 @@
 </gui-paginator>
 
 <ng-template #template>
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
 
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
-    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-      <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque delectus enim esse excepturi, impedit,
+        iste magnam officia optio, quam quis quisquam saepe sint unde velit vitae! Animi in iusto ut?</p>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque delectus enim esse excepturi, impedit,
-      iste magnam officia optio, quam quis quisquam saepe sint unde velit vitae! Animi in iusto ut?</p>
-
+    </div>
   </div>
 
 </ng-template>
 
 <ng-template #templateEditar>
-  <div class="modal-header">
-    <h4 class="modal-title">Avaliação</h4>
-    <button type="button" class="btn-close" (click)="modalRef?.hide()"></button>
-  </div>
 
-  <div class="modal-body">
-    <app-avaliacao-form [modalRef]="modalRef" [avaliacao_id]="avaliacao_id"></app-avaliacao-form>
+  <div class="modal-dialog">
+      <div class="modal-header">
+        <h4 class="modal-title">Avaliação</h4>
+        <button type="button" class="btn-close" (click)="modalRef?.hide()"></button>
+      </div>
+      <div class="modal-body">
+        <app-avaliacao-form [modalRef]="modalRef" [avaliacao_id]="avaliacao_id"></app-avaliacao-form>
+      </div>
   </div>
 
 </ng-template>

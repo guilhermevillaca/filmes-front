@@ -87,9 +87,14 @@
     </div>
 
     <div class="text-center mt-4">
-      <button type="button" (click)="create()" class="btn btn-primary px-4">
-        Salvar
-      </button>
+      <div class="text-center mt-4">
+        <button
+          type="button"
+          class="btn btn-primary px-4"
+          (click)="id ? update() : create()">
+          {{ id ? 'Atualizar' : 'Salvar' }}
+        </button>
+      </div>
     </div>
   </form>
 </div>

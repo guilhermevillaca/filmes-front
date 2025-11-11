@@ -1,9 +1,10 @@
 import {Component, inject} from '@angular/core';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {SHARED_IMPORTS} from '../../../shared/util/shared-imports';
 import {GeneroService} from '../../../core/service/genero-service';
 import {Genero} from '../../../core/model/genero';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Obra} from '../../../core/model/obra';
 
 @Component({
   selector: 'app-genero-form',
@@ -17,6 +18,7 @@ export class GeneroForm {
   id: any;
   private activateRoute = inject(ActivatedRoute);
   private service = inject(GeneroService);
+  private route = inject(Router);
   genero: any;
 
   form = new FormGroup({
@@ -33,16 +35,42 @@ export class GeneroForm {
 
   public findById(){
     this.service.findById(this.id).subscribe({
-      next: (data: Genero) => {
+      next: (data: any) => {
         this.genero = data;
-        this.form.controls.id = this.genero.id;
-        this.form.controls.nome = this.genero.nome;
+        this.form.controls.id.setValue(this.genero.id);
+        this.form.controls.nome.setValue(this.genero.nome);
       },
       error: (error) => console.error(error)
     })
   }
 
-  public salvar(): void{
-    console.log('salvando');
+  public create(): void {
+    if (this.form.invalid) return;
+    const genero: Genero = {
+      ...this.form.getRawValue()
+    };
+    this.save(genero);
+  }
+
+  public update(): void {
+    if (this.form.invalid) return;
+    const genero: Genero = {
+      ...this.form.getRawValue()
+    };
+    this.save(genero);
+  }
+
+  private save(genero: Genero): void{
+    if(this.id){
+      this.service.update(this.id, genero).subscribe({
+        next: () => this.route.navigate(['genero']),
+        error: (error) => console.error(error)
+      });
+    }else{
+      this.service.create(genero).subscribe({
+        next: () => this.route.navigate(['genero']),
+        error: (error) => console.error(error)
+      });
+    }
   }
 }
