@@ -1,1 +1,35 @@
-<p>avaliacao works!</p>
+<h4>Avaliaçções de {{obra?.titulo}}</h4>
+
+<button routerLink="/novo" class="btn btn-primary">Novo</button>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nota</th>
+      <th>Comentário</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(avaliacao of avaliacao$; track avaliacao.id){
+      <tr>
+        <td>{{avaliacao.id}}</td>
+        <td>{{avaliacao.nota}}</td>
+        <td>{{avaliacao.comentario | slice:0:50}}</td>
+        <td>
+          <button class="btn btn-success" (click)="visualizar(avaliacao.id)">Visualizar</button>&nbsp;
+          <button class="btn btn-primary" (click)="editar(avaliacao.id)">Editar</button>&nbsp;
+          <button class="btn btn-danger" (click)="excluir(avaliacao.id)">Excluir</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<gui-paginator
+  [totalPages]="totalPages"
+  [currentPage]="currentPage"
+  (pageChange)="onPageChange($event)">
+</gui-paginator>
+

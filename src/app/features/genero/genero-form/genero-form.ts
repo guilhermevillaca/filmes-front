@@ -20,7 +20,7 @@ export class GeneroForm {
   genero: any;
 
   form = new FormGroup({
-    id: new FormControl<number | null>(null),
+    id: new FormControl<number | null>({value: null, disabled: true}),
     nome: new FormControl<string | null>('')
   })
 

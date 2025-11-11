@@ -21,7 +21,7 @@ export class GeneroService {
   }
 
   public getPaginado(page: any, size: any): Observable<Page<Genero>>{
-    return this.http.get<Page<Genero>>(`${this.url}paginated?page=${page}&size=${size}`);
+    return this.http.get<Page<Genero>>(`${this.url}/paginated?page=${page}&size=${size}`);
   }
 
   public getById(id: number): Observable<Genero> {

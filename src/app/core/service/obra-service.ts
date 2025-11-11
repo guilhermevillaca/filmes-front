@@ -19,7 +19,7 @@ export class ObraService {
   }
 
   public getPaginado(page: any, size: any): Observable<Page<Obra>>{
-    return this.http.get<Page<Obra>>(`${this.url}paginated?page=${page}&size=${size}`);
+    return this.http.get<Page<Obra>>(`${this.url}/paginated?page=${page}&size=${size}`);
   }
 
   //http://localhost:8080/obra/listar/1

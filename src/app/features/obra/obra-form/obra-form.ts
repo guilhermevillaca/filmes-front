@@ -6,14 +6,16 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { GeneroService } from '../../../core/service/genero-service';
 import {Obra} from '../../../core/model/obra';
 import {SHARED_IMPORTS} from '../../../shared/util/shared-imports';
+import {AvaliacaoList} from '../../avaliacao/avaliacao-list';
 
 @Component({
   selector: 'app-obra-form',
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    SHARED_IMPORTS
-],
+    SHARED_IMPORTS,
+    AvaliacaoList
+  ],
   templateUrl: './obra-form.html',
   styleUrl: './obra-form.css',
 })
@@ -30,7 +32,7 @@ export class ObraForm {
   ano: any;
 
   form = new FormGroup({
-    id: new FormControl<number | null>(null),
+    id: new FormControl<number | null>({value: null, disabled: true}),
     titulo: new FormControl<string | null>(''),
     descricao: new FormControl<string | null>(''),
     anoLancamento: new FormControl<number | null>(null),
@@ -43,7 +45,6 @@ export class ObraForm {
 
   ngOnInit(){
     this.id = this.activateRoute.snapshot.params['id'];
-    console.log(this.id);
     if(this.id){
       this.getById();
     }
