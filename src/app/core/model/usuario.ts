@@ -5,4 +5,5 @@ export interface Usuario {
     login?: string  | null;
     senha?: string  | null;
     dataCadastro?: string  | null;
+    perfil?: string  | null;
 }

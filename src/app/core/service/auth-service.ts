@@ -1,18 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import {getToken} from '../../shared/util/util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private TOKEN_KEY = 'token';
 
   constructor(private router: Router) {}
-
-  getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
-  }
 
   isTokenExpired(token: string): boolean {
     try {
@@ -27,12 +23,12 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    const token = this.getToken();
+    const token = getToken();
     return !!token && !this.isTokenExpired(token);
   }
 
   logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 }

@@ -14,3 +14,8 @@ export function converterDataInputParaISO(dataInput: string | null | undefined):
   const corrected = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
   return corrected.toISOString();
 }
+
+
+export function getToken(): string | null {
+  return localStorage.getItem('token');
+}

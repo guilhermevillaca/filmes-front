@@ -61,6 +61,18 @@
         />
       </div>
 
+      <div class="col-md-12">
+        <label for="perfil" class="form-label">Perfil</label>
+        <select name="perfil" id="tipo" [formControl]="form.controls.perfil" class="form-select">
+          <option value="">Selecione...</option>
+          <option value="ADMIN">Admin</option>
+          <option value="MODERADOR">Moderador</option>
+          <option value="AVALIADOR">Avaliador</option>
+          <option value="LEITOR">Leitor</option>
+          <option value="CONVIDADO">Convidado</option>
+        </select>
+      </div>
+
       <div class="text-center mt-4">
         <div class="text-center mt-4">
           <button

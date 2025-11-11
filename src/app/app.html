@@ -1,4 +1,4 @@
-@if(logado){
+@if(logado | async){
   <div class="d-flex flex-column min-vh-100">
 
       <main class="flex-fill container py-4">
@@ -16,6 +16,6 @@
   </div>
 }
 
-@if(!logado){
+@if(!(logado | async)){
   <router-outlet />
 }

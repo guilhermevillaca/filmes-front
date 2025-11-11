@@ -8,7 +8,7 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
-import {httpInterceptor} from './http-interceptor';
+import {httpInterceptor} from './core/interceptor/http-interceptor';
 import {ModalModule} from 'ngx-bootstrap/modal';
 
 export const appConfig: ApplicationConfig = {

@@ -8,6 +8,7 @@
       <th>ID</th>
       <th>Nome</th>
       <th>Email</th>
+      <th>Perfil</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
         <td>{{usuario.id}}</td>
         <td>{{usuario.nome}}</td>
         <td>{{usuario.email}}</td>
+        <td>{{usuario.perfil}}</td>
         <td>
           <button class="btn btn-primary" (click)="editar(usuario.id)">Editar</button>&nbsp;
           <button class="btn btn-danger" (click)="excluir(usuario.id)">Excluir</button>

@@ -30,7 +30,8 @@ export class UsuarioForm {
     nome: new FormControl<string | null>(''),
     email: new FormControl<string | null>(''),
     login: new FormControl<string | null>(null),
-    dataCadastro: new FormControl<string | null>('')
+    dataCadastro: new FormControl<string | null>(''),
+    perfil: new FormControl<string | null>('')
   });
 
   ngOnInit() {
@@ -49,6 +50,7 @@ export class UsuarioForm {
         this.form.controls.email.setValue(this.usuario.email);
         this.form.controls.login.setValue(this.usuario.login);
         this.form.controls.dataCadastro.setValue(converterDataISOParaInput(this.usuario.dataCadastro));
+        this.form.controls.perfil.setValue(this.usuario.perfil)
       },
       error: (error) => console.error(error)
     });
