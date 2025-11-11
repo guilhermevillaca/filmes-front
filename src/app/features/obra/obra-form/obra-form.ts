@@ -32,13 +32,13 @@ export class ObraForm {
   ano: any;
 
   form = new FormGroup({
-    id: new FormControl<number | null>({value: null, disabled: true}),
+    id: new FormControl<string | null>({value: null, disabled: true}),
     titulo: new FormControl<string | null>(''),
     descricao: new FormControl<string | null>(''),
     anoLancamento: new FormControl<number | null>(null),
     imagemUrl: new FormControl<string | null>(''),
     tipo: new FormControl<string | null>(''),
-    genero: new FormControl<number | null>(null)
+    genero: new FormControl<string | null>(null)
   });
   constructor(){
   }
@@ -46,21 +46,21 @@ export class ObraForm {
   ngOnInit(){
     this.id = this.activateRoute.snapshot.params['id'];
     if(this.id){
-      this.getById();
+      this.findById();
     }
-    this.getGeneros();
+    this.findGeneros();
     this.ano = new Date(Date.now()).getFullYear()+10;
   }
 
-  public getGeneros(){
-    this.generoService.getGeneros().subscribe({
+  public findGeneros(){
+    this.generoService.findAll().subscribe({
       next: (data) => this.genero$ = data,
       error: (error) => console.error(error),
     })
   }
 
-  public getById(){
-    this.obraService.getObraById(this.id).subscribe({
+  public findById(){
+    this.obraService.findById(this.id).subscribe({
       next: (data: Obra): void => {
         this.obra = data;
         //popular campos do formulário
@@ -77,20 +77,29 @@ export class ObraForm {
 
   }
 
-  public salvar(){
+  public create(): void {
+    if (this.form.invalid) return;
 
-    let obra = {
-      titulo: this.form.controls.titulo.value,
-      descricao: this.form.controls.descricao.value,
-      anoLancamento: this.form.controls.anoLancamento.value,
-      imagemUrl: this.form.controls.imagemUrl.value,
-      tipo: this.form.controls.tipo.value,
-      genero: {
-        id: this.form.controls.genero.value
-      }
+    const obra: Obra = {
+      ...this.form.getRawValue(),
+      genero: { id: this.form.controls.genero.value }
     };
-    console.log(obra);
-    this.obraService.salvar(this.id, obra).subscribe({
+
+    this.obraService.create(obra).subscribe({
+      next: () => this.route.navigate(['obra']),
+      error: (error) => console.error(error)
+    });
+  }
+
+  public update(){
+    if (this.form.invalid) return;
+
+    const obra: Obra = {
+      ...this.form.getRawValue(),
+      genero: { id: this.form.controls.genero.value }
+    };
+
+    this.obraService.update(this.id, obra).subscribe({
       next: (obra) => {
         this.route.navigate(['obra'])
       },

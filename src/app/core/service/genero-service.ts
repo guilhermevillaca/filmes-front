@@ -4,28 +4,13 @@ import { map, Observable } from 'rxjs';
 import {Genero} from '../model/genero';
 import {Page} from '../model/page';
 import {Obra} from '../model/obra';
+import {GenericService} from './generic-service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GeneroService {
-
-  //listar
-  url = 'http://localhost:8080/genero';
-
-  private http: HttpClient = inject(HttpClient);
-
-
-  public getGeneros(): Observable<Genero[]>{
-    return this.http.get<Genero[]>(this.url).pipe(map(response=>response));
+export class GeneroService extends GenericService<Genero> {
+  constructor() {
+    super('http://localhost:8080/genero');
   }
-
-  public getPaginado(page: any, size: any): Observable<Page<Genero>>{
-    return this.http.get<Page<Genero>>(`${this.url}/paginated?page=${page}&size=${size}`);
-  }
-
-  public getById(id: number): Observable<Genero> {
-    return this.http.get<Genero>(`${this.url}/${id}`).pipe(map(response=>response));
-  }
-
 }

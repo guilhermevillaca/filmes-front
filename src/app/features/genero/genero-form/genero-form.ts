@@ -14,25 +14,25 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular
 export class GeneroForm {
 
   acao: string = 'Novo';
-  id: number = 0;
+  id: any;
   private activateRoute = inject(ActivatedRoute);
   private service = inject(GeneroService);
   genero: any;
 
   form = new FormGroup({
-    id: new FormControl<number | null>({value: null, disabled: true}),
+    id: new FormControl<string | null>({value: null, disabled: true}),
     nome: new FormControl<string | null>('')
   })
 
   ngOnInit(): void {
     this.id = this.activateRoute.snapshot.params['id'];
     if(this.id){
-      this.getById();
+      this.findById();
     }
   }
 
-  public getById(){
-    this.service.getById(this.id).subscribe({
+  public findById(){
+    this.service.findById(this.id).subscribe({
       next: (data: Genero) => {
         this.genero = data;
         this.form.controls.id = this.genero.id;

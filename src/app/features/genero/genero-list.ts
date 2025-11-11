@@ -20,18 +20,18 @@ export class GeneroList {
   pageSize = 2;
 
   ngOnInit() {
-    this.getPaginado(0);
+    this.findAllPaginated(0);
   }
 
-  public getGeneros(){
-    this.service.getGeneros().subscribe({
+  public findAll(){
+    this.service.findAll().subscribe({
       next: (data: any) => this.genero$ = data,
       error: (error: any) => console.error(error)
     });
   }
 
-  public getPaginado(page: number) {
-    this.service.getPaginado(page, this.pageSize).subscribe({
+  public findAllPaginated(page: number) {
+    this.service.findAllPaginated(page, this.pageSize).subscribe({
       next: (data) => {
         this.genero$ = data.content ?? [];
         this.currentPage = data.number;
@@ -42,15 +42,15 @@ export class GeneroList {
 
   onPageChange(page: number) {
     this.currentPage = page;
-    this.getPaginado(page);
+    this.findAllPaginated(page);
   }
 
-  public editar(id: number){
+  public editar(id: any){
     this.route.navigate([`/genero/editar/`, id]);
   }
 
-  public excluir(id: number) {
-
+  public excluir(id: any) {
+    console.log(id);
   }
 
 }

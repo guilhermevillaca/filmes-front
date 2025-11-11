@@ -23,11 +23,11 @@ export class AvaliacaoList {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['obra'] && this.obra?.id) {
-      this.getAvaliacaos(0);
+      this.findByObra_id(0);
     }
   }
 
-  public getAvaliacaos(page: any){
+  public findByObra_id(page: any){
     console.log(this.obra.id);
     this.service.findByObra_id(this.obra?.id, this.currentPage, this.pageSize).subscribe({
       next: (data) => {
@@ -41,7 +41,7 @@ export class AvaliacaoList {
 
   onPageChange(page: number) {
     this.currentPage = page;
-    this.getAvaliacaos(page);
+    this.findByObra_id(page);
   }
 
   public editar(id: any){

@@ -18,19 +18,19 @@ export class UsuarioList {
   usuario$: Usuario[] = [];
 
   ngOnInit() {
-    this.getPaginado(0);
+    this.findAllPaginated(0);
   }
 
   public getUsuarios() {
-    this.service.getUsuarios().subscribe({
-      next: (data) => this.usuario$ = data,
-      error: (error) => console.error(error)
+    this.service.findAll().subscribe({
+      next: (data: any) => this.usuario$ = data,
+      error: (error: any) => console.error(error)
     })
   }
 
-  public getPaginado(page: number) {
-    this.service.getPaginado(page, this.pageSize).subscribe({
-      next: (data) => {
+  public findAllPaginated(page: number) {
+    this.service.findAllPaginated(page, this.pageSize).subscribe({
+      next: (data: any) => {
         this.usuario$ = data.content ?? [];
         this.currentPage = data.number;
         this.totalPages = data.totalPages;
@@ -40,7 +40,7 @@ export class UsuarioList {
 
   onPageChange(page: number) {
     this.currentPage = page;
-    this.getPaginado(page);
+    this.findAllPaginated(page);
   }
 
   public editar(id: any){

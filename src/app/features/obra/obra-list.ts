@@ -22,18 +22,18 @@ export class ObraList {
   private route = inject(Router);
 
   ngOnInit(): void {
-    this.getPaginado(0);
+    this.findAllPaginated(0);
   }
 
-  public async getObra() {
-    this.service.getObras().subscribe({
+  public async findAll() {
+    this.service.findAll().subscribe({
       next: (data) => this.obra$ = data,
       error: (error) => console.error(error),
     })
   }
 
-  public getPaginado(page: number) {
-    this.service.getPaginado(page, this.pageSize).subscribe({
+  public findAllPaginated(page: number) {
+    this.service.findAllPaginated(page, this.pageSize).subscribe({
       next: (data) => {
         this.obra$ = data.content ?? [];
         this.currentPage = data.number;
@@ -44,7 +44,7 @@ export class ObraList {
 
   onPageChange(page: number) {
     this.currentPage = page;
-    this.getPaginado(page);
+    this.findAllPaginated(page);
   }
 
   //redirecionar para componente de edição de obra

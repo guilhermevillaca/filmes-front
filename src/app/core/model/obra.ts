@@ -1,8 +1,12 @@
 import { Genero } from "./genero";
+import {FormControl} from '@angular/forms';
 
 export interface Obra {
-  id: number;
-  titulo: string;
-  anoLancamento: number;
-  genero: Genero;
+  id: string | null;
+  titulo: string | null;
+  descricao: string | null;
+  anoLancamento: number | null;
+  imagemUrl: string | null;
+  tipo: string | null;
+  genero?: Genero;
 }
