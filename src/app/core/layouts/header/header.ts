@@ -15,7 +15,7 @@ export class Header {
 
   public sair() {
     this.loginService.sair();
-    this.route.navigate(['/login']);
+    this.route.navigate(['/']);
   }
 
 }

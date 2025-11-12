@@ -15,7 +15,7 @@ import {AvaliacaoForm} from './avaliacao-form/avaliacao-form';
 })
 export class AvaliacaoList {
 
-  @Input() obra!: Obra;
+  @Input() obra: Obra | null = null;
   currentPage = 0;
   totalPages: number = 0;
   pageSize = 10;
@@ -35,7 +35,6 @@ export class AvaliacaoList {
   }
 
   public findByObra_id(page: any){
-    console.log(this.obra.id);
     this.service.findByObra_id(this.obra?.id, this.currentPage, this.pageSize).subscribe({
       next: (data) => {
         this.avaliacao$ = data.content ?? [];

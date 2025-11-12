@@ -10,9 +10,10 @@ import {GeneroForm} from './features/genero/genero-form/genero-form';
 import {UsuarioForm} from './features/usuario/usuario-form/usuario-form';
 import {AcessoNaoAutorizado} from './features/site/acesso-nao-autorizado/acesso-nao-autorizado';
 import {perfilGuard} from './core/guard/perfil.guard';
+import {Home} from './features/site/home/home';
 
 export const routes: Routes = [
-  {path: '', component: Painel, canActivate: [authGuard, perfilGuard]},
+  {path: '', component: Home},
   {path: 'obra', component: ObraList, canActivate: [authGuard, perfilGuard]},
   {path: 'obra/editar/:id', component: ObraForm, canActivate: [authGuard, perfilGuard]},
   {path: 'obra/novo', component: ObraForm, canActivate: [authGuard, perfilGuard]},
