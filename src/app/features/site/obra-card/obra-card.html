@@ -1,0 +1,13 @@
+<!-- obra-card.component.html -->
+<div class="card h-100 shadow-sm">
+  <img
+    [src]="obra?.imagemUrl || 'assets/placeholder.jpg'"
+    class="card-img-top"
+    [alt]="obra?.titulo"
+  />
+  <div class="card-body">
+    <h6 class="card-title text-truncate">{{ obra?.titulo }}</h6>
+    <p class="card-text small text-muted mb-2">{{ obra?.anoLancamento }}</p>
+    <button class="btn btn-outline-primary btn-sm w-100">Ver detalhes</button>
+  </div>
+</div>

@@ -12,4 +12,11 @@ export class ObraService extends GenericService<Obra> {
   constructor() {
     super('http://localhost:8080/obra');
   }
+
+
+
+  public findByGenero(genero_id: any, page: number, size: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/findByGenero/${genero_id}?page=${page}&size=${size}`);
+  }
+
 }

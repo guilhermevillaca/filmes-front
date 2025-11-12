@@ -1,0 +1,17 @@
+.logo {
+  background-color: #f5c518; /* amarelo IMDb */
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 22px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.logo span {
+  color: #000;
+}
+
+.logo a{
+  text-decoration: none;
+}

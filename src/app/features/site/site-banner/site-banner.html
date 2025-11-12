@@ -1,0 +1,20 @@
+<!-- site-banner.component.html -->
+<div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner rounded-3 shadow">
+    @for(destaque of destaques; track destaque.id; let i = $index){
+      <div class="carousel-item" [class.active]="i === 0">
+        <img [src]="destaque.imagemUrl" class="d-block w-100" [alt]="destaque.titulo" />
+        <div class="carousel-caption bg-dark bg-opacity-50 rounded p-2">
+          <h5>{{ destaque.titulo }}</h5>
+          <p>{{ destaque.descricao }}</p>
+        </div>
+      </div>
+    }
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>

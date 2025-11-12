@@ -1,9 +1,45 @@
 <site-header></site-header>
 
-<div class="container">
+<div class="container mt-4">
+  <!-- Banner de destaques -->
+  <section class="mb-5">
+    <site-banner></site-banner>
+  </section>
 
-  <p>home works!</p>
+  <!-- Seção de filmes em destaque -->
+  <section>
+    <h3 class="mb-3">Filmes em Destaque</h3>
+    <div class="row g-3">
+      @for(filme of filmes; track filme.id){
+      <div class="col-6 col-md-3">
+        <obra-card [obra]="filme"></obra-card>
+      </div>}
+    </div>
+  </section>
 
+  <!-- Seção de séries populares -->
+  <section class="mt-5">
+    <h3 class="mb-3">Séries Populares</h3>
+    <div class="row g-3">
+      @for(serie of series; track serie.id){
+        <div class="col-6 col-md-3">
+          <obra-card [obra]="serie"></obra-card>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Seção de animes -->
+  <section class="mt-5">
+    <h3 class="mb-3">Animes em Alta</h3>
+    <div class="row g-3">
+      @for(anime of animes; track anime.id){
+        <div class="col-6 col-md-3">
+          <obra-card [obra]="anime"></obra-card>
+        </div>
+      }
+    </div>
+  </section>
 </div>
 
 <site-footer></site-footer>

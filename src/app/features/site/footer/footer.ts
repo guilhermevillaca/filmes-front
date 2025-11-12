@@ -8,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class Footer {
 
+  ano: any;
+
+  ngOnInit() {
+    const data = new Date();
+    this.ano = data.getFullYear();
+  }
+
 }
